@@ -85,7 +85,7 @@
 		B079AA0C156602430082F465 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B079AA0E15660BFE0082F465 /* AKPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPlace.h; sourceTree = "<group>"; };
 		B079AA0F15660BFF0082F465 /* AKPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKPlace.m; sourceTree = "<group>"; };
-		B079AA11156614900082F465 /* AKActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AKActionsViewController.h; sourceTree = "<group>"; };
+		B079AA11156614900082F465 /* AKActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKActionsViewController.h; sourceTree = "<group>"; };
 		B079AA12156614900082F465 /* AKActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKActionsViewController.m; sourceTree = "<group>"; };
 		B079AA141566187B0082F465 /* AKItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKItemsViewController.h; sourceTree = "<group>"; };
 		B079AA151566187B0082F465 /* AKItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKItemsViewController.m; sourceTree = "<group>"; };
