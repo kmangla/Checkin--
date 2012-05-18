@@ -14,6 +14,7 @@
   Facebook* _facebook;
   CLLocationManager* _locationManager;
   FBRequest* _request;
+  NSArray *_places;
 }
 
 - (id) initWithFacebook:(Facebook*) facebook;

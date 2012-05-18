@@ -27,6 +27,9 @@
 		B06A61601565E9BD00921912 /* AKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B06A615F1565E9BD00921912 /* AKAppDelegate.m */; };
 		B06A61631565E9BD00921912 /* AKPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06A61621565E9BD00921912 /* AKPlacesViewController.m */; };
 		B079AA0D156602430082F465 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B079AA0C156602430082F465 /* CoreLocation.framework */; };
+		B079AA1015660BFF0082F465 /* AKPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = B079AA0F15660BFF0082F465 /* AKPlace.m */; };
+		B079AA13156614900082F465 /* AKActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B079AA12156614900082F465 /* AKActionsViewController.m */; };
+		B079AA161566187B0082F465 /* AKItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B079AA151566187B0082F465 /* AKItemsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,12 @@
 		B06A61611565E9BD00921912 /* AKPlacesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKPlacesViewController.h; sourceTree = "<group>"; };
 		B06A61621565E9BD00921912 /* AKPlacesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKPlacesViewController.m; sourceTree = "<group>"; };
 		B079AA0C156602430082F465 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B079AA0E15660BFE0082F465 /* AKPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKPlace.h; sourceTree = "<group>"; };
+		B079AA0F15660BFF0082F465 /* AKPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKPlace.m; sourceTree = "<group>"; };
+		B079AA11156614900082F465 /* AKActionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = AKActionsViewController.h; sourceTree = "<group>"; };
+		B079AA12156614900082F465 /* AKActionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKActionsViewController.m; sourceTree = "<group>"; };
+		B079AA141566187B0082F465 /* AKItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKItemsViewController.h; sourceTree = "<group>"; };
+		B079AA151566187B0082F465 /* AKItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKItemsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,8 +191,14 @@
 				7BF18A331565FABC004E2002 /* FBConnect */,
 				B06A615E1565E9BD00921912 /* AKAppDelegate.h */,
 				B06A615F1565E9BD00921912 /* AKAppDelegate.m */,
+				B079AA11156614900082F465 /* AKActionsViewController.h */,
+				B079AA12156614900082F465 /* AKActionsViewController.m */,
+				B079AA141566187B0082F465 /* AKItemsViewController.h */,
+				B079AA151566187B0082F465 /* AKItemsViewController.m */,
 				B06A61611565E9BD00921912 /* AKPlacesViewController.h */,
 				B06A61621565E9BD00921912 /* AKPlacesViewController.m */,
+				B079AA0E15660BFE0082F465 /* AKPlace.h */,
+				B079AA0F15660BFF0082F465 /* AKPlace.m */,
 				B06A61561565E9BD00921912 /* Supporting Files */,
 			);
 			path = "Checkin++";
@@ -293,6 +308,9 @@
 				7BF18A571565FABC004E2002 /* Facebook.m in Sources */,
 				7BF18A581565FABC004E2002 /* FBLoginDialog.m in Sources */,
 				7BF18A591565FABC004E2002 /* FBDialog.m in Sources */,
+				B079AA1015660BFF0082F465 /* AKPlace.m in Sources */,
+				B079AA13156614900082F465 /* AKActionsViewController.m in Sources */,
+				B079AA161566187B0082F465 /* AKItemsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
