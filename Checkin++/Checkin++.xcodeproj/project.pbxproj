@@ -1,0 +1,268 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B06A61501565E9BD00921912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A614F1565E9BD00921912 /* UIKit.framework */; };
+		B06A61521565E9BD00921912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A61511565E9BD00921912 /* Foundation.framework */; };
+		B06A61541565E9BD00921912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A61531565E9BD00921912 /* CoreGraphics.framework */; };
+		B06A615A1565E9BD00921912 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B06A61581565E9BD00921912 /* InfoPlist.strings */; };
+		B06A615C1565E9BD00921912 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B06A615B1565E9BD00921912 /* main.m */; };
+		B06A61601565E9BD00921912 /* AKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B06A615F1565E9BD00921912 /* AKAppDelegate.m */; };
+		B06A61631565E9BD00921912 /* AKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B06A61621565E9BD00921912 /* AKViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B06A614B1565E9BD00921912 /* Checkin++.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Checkin++.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B06A614F1565E9BD00921912 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		B06A61511565E9BD00921912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B06A61531565E9BD00921912 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		B06A61571565E9BD00921912 /* Checkin++-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Checkin++-Info.plist"; sourceTree = "<group>"; };
+		B06A61591565E9BD00921912 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B06A615B1565E9BD00921912 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B06A615D1565E9BD00921912 /* Checkin++-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Checkin++-Prefix.pch"; sourceTree = "<group>"; };
+		B06A615E1565E9BD00921912 /* AKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKAppDelegate.h; sourceTree = "<group>"; };
+		B06A615F1565E9BD00921912 /* AKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKAppDelegate.m; sourceTree = "<group>"; };
+		B06A61611565E9BD00921912 /* AKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKViewController.h; sourceTree = "<group>"; };
+		B06A61621565E9BD00921912 /* AKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B06A61481565E9BD00921912 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B06A61501565E9BD00921912 /* UIKit.framework in Frameworks */,
+				B06A61521565E9BD00921912 /* Foundation.framework in Frameworks */,
+				B06A61541565E9BD00921912 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B06A61401565E9BD00921912 = {
+			isa = PBXGroup;
+			children = (
+				B06A61551565E9BD00921912 /* Checkin++ */,
+				B06A614E1565E9BD00921912 /* Frameworks */,
+				B06A614C1565E9BD00921912 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B06A614C1565E9BD00921912 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B06A614B1565E9BD00921912 /* Checkin++.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B06A614E1565E9BD00921912 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B06A614F1565E9BD00921912 /* UIKit.framework */,
+				B06A61511565E9BD00921912 /* Foundation.framework */,
+				B06A61531565E9BD00921912 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B06A61551565E9BD00921912 /* Checkin++ */ = {
+			isa = PBXGroup;
+			children = (
+				B06A615E1565E9BD00921912 /* AKAppDelegate.h */,
+				B06A615F1565E9BD00921912 /* AKAppDelegate.m */,
+				B06A61611565E9BD00921912 /* AKViewController.h */,
+				B06A61621565E9BD00921912 /* AKViewController.m */,
+				B06A61561565E9BD00921912 /* Supporting Files */,
+			);
+			path = "Checkin++";
+			sourceTree = "<group>";
+		};
+		B06A61561565E9BD00921912 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B06A61571565E9BD00921912 /* Checkin++-Info.plist */,
+				B06A61581565E9BD00921912 /* InfoPlist.strings */,
+				B06A615B1565E9BD00921912 /* main.m */,
+				B06A615D1565E9BD00921912 /* Checkin++-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B06A614A1565E9BD00921912 /* Checkin++ */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B06A61691565E9BD00921912 /* Build configuration list for PBXNativeTarget "Checkin++" */;
+			buildPhases = (
+				B06A61471565E9BD00921912 /* Sources */,
+				B06A61481565E9BD00921912 /* Frameworks */,
+				B06A61491565E9BD00921912 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Checkin++";
+			productName = "Checkin++";
+			productReference = B06A614B1565E9BD00921912 /* Checkin++.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B06A61421565E9BD00921912 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AK;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = B06A61451565E9BD00921912 /* Build configuration list for PBXProject "Checkin++" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B06A61401565E9BD00921912;
+			productRefGroup = B06A614C1565E9BD00921912 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B06A614A1565E9BD00921912 /* Checkin++ */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B06A61491565E9BD00921912 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B06A615A1565E9BD00921912 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B06A61471565E9BD00921912 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B06A615C1565E9BD00921912 /* main.m in Sources */,
+				B06A61601565E9BD00921912 /* AKAppDelegate.m in Sources */,
+				B06A61631565E9BD00921912 /* AKViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B06A61581565E9BD00921912 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B06A61591565E9BD00921912 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B06A61671565E9BD00921912 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B06A61681565E9BD00921912 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B06A616A1565E9BD00921912 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Checkin++/Checkin++-Prefix.pch";
+				INFOPLIST_FILE = "Checkin++/Checkin++-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		B06A616B1565E9BD00921912 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Checkin++/Checkin++-Prefix.pch";
+				INFOPLIST_FILE = "Checkin++/Checkin++-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B06A61451565E9BD00921912 /* Build configuration list for PBXProject "Checkin++" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B06A61671565E9BD00921912 /* Debug */,
+				B06A61681565E9BD00921912 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B06A61691565E9BD00921912 /* Build configuration list for PBXNativeTarget "Checkin++" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B06A616A1565E9BD00921912 /* Debug */,
+				B06A616B1565E9BD00921912 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B06A61421565E9BD00921912 /* Project object */;
+}
