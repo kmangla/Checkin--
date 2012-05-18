@@ -12,7 +12,7 @@
 
 static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php";
 
-@interface AKItemsViewController () <FBRequestDelegate>
+@interface AKItemsViewController () <FBRequestDelegate, UIAlertViewDelegate>
 
 - (void)_initiateObjectsDownload;
 
@@ -95,17 +95,19 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   AKItem *item = [_items objectAtIndex:indexPath.row];
 
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                 [NSString stringWithFormat:@"%d", _questionType], @"question_type",
+                                 _facebook.accessToken, @"access_token",
+                                 item.questionType, @"question_type",
                                  _place.fbid, @"page_id",
+                                 item.itemId, @"item_id",
+                                 @"1", @"publish",
                                  nil];
   FBRequest *request = [FBRequest getRequestWithParams:params
-                                            httpMethod:@"GET"
+                                            httpMethod:@"POST"
                                               delegate:self
                                             requestURL:kAppURL];
   [self.publishRequest.connection cancel];
   self.publishRequest = request;
   [request connect];
-  
 }
 
 #pragma mark - FBRequestDelegate
@@ -122,14 +124,31 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
 
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
-  NSMutableArray *items = [[NSMutableArray alloc] init];
-  for (NSDictionary *item in result){
-    [items addObject:[[AKItem alloc] initWithJSON:item]];
+  if (request == self.downloadRequest) {
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    for (NSDictionary *item in result){
+      [items addObject:[[AKItem alloc] initWithJSON:item]];
+    }
+    self.downloadRequest = nil;
+    [_items release];
+    _items = items;
+    [self.tableView reloadData];
+  } else if (request == self.publishRequest) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                    message:@"Thanks for playing"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
   }
-  self.downloadRequest = nil;
-  [_items release];
-  _items = items;
-  [self.tableView reloadData];
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - Private
