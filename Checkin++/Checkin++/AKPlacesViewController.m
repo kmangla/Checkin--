@@ -45,7 +45,6 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-  NSLog(@"%@", result);
   NSMutableArray *places = [[NSMutableArray alloc] init];
   NSArray *arrayResult = [result objectForKey:@"data"];
   for (NSDictionary *place in arrayResult){

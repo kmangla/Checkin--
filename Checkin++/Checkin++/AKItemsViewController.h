@@ -15,6 +15,8 @@
   AKPlace *_place;
   AKQuestionType _questionType;
   FBRequest *_downloadRequest;
+  FBRequest *_publishRequest;
+  NSArray *_items;
 }
 
 - (id)initWithFacebook:(Facebook *)facebook place:(AKPlace*)place questionType:(AKQuestionType)questionType;
