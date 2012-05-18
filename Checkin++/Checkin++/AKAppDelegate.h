@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 
-@class AKViewController;
+@class AKPlacesViewController;
 
 @interface AKAppDelegate : UIResponder <UIApplicationDelegate, FBSessionDelegate> {
     Facebook *_facebook;

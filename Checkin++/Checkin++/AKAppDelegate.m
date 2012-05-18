@@ -8,7 +8,7 @@
 
 #import "AKAppDelegate.h"
 
-#import "AKViewController.h"
+#import "AKPlacesViewController.h"
 
 @implementation AKAppDelegate
 
@@ -26,7 +26,7 @@
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
   _facebook = [[Facebook alloc] initWithAppId:@"173832779412397" andDelegate:self];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  if ([defaults objectForKey:@"FBAccessTokenKey"] 
+  if ([defaults objectForKey:@"FBAccessTokenKey"]
        && [defaults objectForKey:@"FBExpirationDateKey"]) {
     _facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
     _facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
@@ -36,7 +36,7 @@
   }
 
 
-  UIViewController *rootViewController = [[AKViewController alloc] initWithNibName:nil bundle:nil];
+  UIViewController *rootViewController = [[AKPlacesViewController alloc] initWithFacebook:_facebook];
   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
   [rootViewController release];
   self.window.rootViewController = navigationController;
@@ -74,14 +74,14 @@
 }
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [_facebook handleOpenURL:url]; 
+    return [_facebook handleOpenURL:url];
 }
 - (void)fbDidLogin {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    
+
 }
 
 
