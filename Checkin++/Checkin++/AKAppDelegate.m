@@ -13,23 +13,24 @@
 @implementation AKAppDelegate
 
 @synthesize window = _window;
-@synthesize viewController = _viewController;
 
 - (void)dealloc
 {
   [_window release];
-  [_viewController release];
-    [super dealloc];
+  [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-  self.viewController = [[[AKViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-  self.window.rootViewController = self.viewController;
-    [self.window makeKeyAndVisible];
-    return YES;
+  self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+  // Override point for customization after application launch.
+  UIViewController *rootViewController = [[AKViewController alloc] initWithNibName:nil bundle:nil];
+  UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+  [rootViewController release];
+  self.window.rootViewController = navigationController;
+  [navigationController release];
+  [self.window makeKeyAndVisible];
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -40,7 +41,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-  // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+  // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
