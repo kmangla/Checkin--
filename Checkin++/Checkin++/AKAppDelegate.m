@@ -13,6 +13,7 @@
 @implementation AKAppDelegate
 
 @synthesize window = _window;
+@synthesize facebook = _facebook;
 
 - (void)dealloc
 {
@@ -23,13 +24,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-  // Override point for customization after application launch.
+  _facebook = [[Facebook alloc] initWithAppId:@"173832779412397" andDelegate:self];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if ([defaults objectForKey:@"FBAccessTokenKey"] 
+       && [defaults objectForKey:@"FBExpirationDateKey"]) {
+    _facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+    _facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+  }
+  if (![_facebook isSessionValid]) {
+      [_facebook authorize:nil];
+  }
+
+
   UIViewController *rootViewController = [[AKViewController alloc] initWithNibName:nil bundle:nil];
   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
   [rootViewController release];
   self.window.rootViewController = navigationController;
   [navigationController release];
   [self.window makeKeyAndVisible];
+
   return YES;
 }
 
@@ -59,5 +72,17 @@
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [_facebook handleOpenURL:url]; 
+}
+- (void)fbDidLogin {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+    
+}
+
 
 @end
