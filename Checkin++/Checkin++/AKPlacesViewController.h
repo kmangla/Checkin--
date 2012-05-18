@@ -17,6 +17,6 @@
   NSArray *_places;
 }
 
-- (id) initWithFacebook:(Facebook*) facebook;
+- (id)initWithFacebook:(Facebook*) facebook;
 
 @end

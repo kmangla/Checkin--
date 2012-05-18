@@ -100,7 +100,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   AKPlace* place = (AKPlace*)[_places objectAtIndex: indexPath.row];
-  UITableViewController* controller = [[AKActionsViewController alloc] initWithPlace: place];
+  UITableViewController* controller = [[AKActionsViewController alloc] initWithFacebook:_facebook place:place];
   [self.navigationController pushViewController: controller animated:YES];
   [controller release];
 }

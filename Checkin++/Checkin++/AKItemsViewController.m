@@ -7,47 +7,53 @@
 //
 
 #import "AKItemsViewController.h"
+#import "FBConnect.h"
 
-@interface AKItemsViewController ()
+static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php";
+
+@interface AKItemsViewController () <FBRequestDelegate>
+
+- (void)_initiateObjectsDownload;
+@property(nonatomic, retain) FBRequest *downloadRequest;
 
 @end
 
 @implementation AKItemsViewController
+@synthesize downloadRequest = _downloadRequest;
 
-- (id)initWithStyle:(UITableViewStyle)style
+#pragma mark - Lifecycle
+
+- (id)initWithFacebook:(Facebook *)facebook place:(AKPlace*)place questionType:(AKQuestionType)questionType
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (id)initWithPlace:(AKPlace*) place {
-  if (self = [super initWithNibName:nil bundle:nil]) {
+  if (self = [super initWithStyle:UITableViewStylePlain]) {
+    _facebook = [facebook retain];
     _place = [place retain];
-    _questions = [[NSArray alloc] initWithObjects: kQ1, kQ2, kQ3, kQ4, kQ5, kQ6, kQ7, nil];
+    _questionType = questionType;
   }
   return self;
 }
 
+- (void)dealloc
+{
+  [_place release];
+  [_facebook release];
+  [_downloadRequest release];
+
+  [super dealloc];
+}
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  [self _initiateObjectsDownload];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+  [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -55,83 +61,65 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
-    
-    return cell;
+  static NSString *cellIdentifier = @"itemCell";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+  }
+
+  return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+  // publish the call
+
+}
+
+#pragma mark - FBRequestDelegate
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response
+{
+
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
+{
+
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result
+{
+
+}
+
+#pragma mark - Private
+
+- (void)_initiateObjectsDownload
+{
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 [NSString stringWithFormat:@"%d", _questionType], @"question_type",
+                                 _place.fbid, @"page_id",
+                                 nil];
+  FBRequest *request = [FBRequest getRequestWithParams:params
+                                            httpMethod:@"GET"
+                                              delegate:self
+                                            requestURL:kAppURL];
+  [self.downloadRequest.connection cancel];
+  self.downloadRequest = request;
+  [request connect];
 }
 
 @end

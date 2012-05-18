@@ -76,11 +76,34 @@
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     return [_facebook handleOpenURL:url];
 }
+
+#pragma mark FBSessionDelegate
+
 - (void)fbDidLogin {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
-    [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
+  [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
+  [defaults synchronize];
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken
+               expiresAt:(NSDate*)expiresAt
+{
+
+}
+
+- (void)fbDidLogout
+{
+
+}
+
+- (void)fbSessionInvalidated
+{
 
 }
 
