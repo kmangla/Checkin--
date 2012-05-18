@@ -7,11 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AKActionsViewController.h"
+#import "FBConnect.h"
 
 @interface AKItemsViewController : UITableViewController {
+  Facebook *_facebook;
   AKPlace *_place;
+  AKQuestionType _questionType;
+  FBRequest *_downloadRequest;
 }
 
-- (id) initWithPlace:(AKPlace*) place action:(NSString*) action;
+- (id)initWithFacebook:(Facebook *)facebook place:(AKPlace*)place questionType:(AKQuestionType)questionType;
 
 @end

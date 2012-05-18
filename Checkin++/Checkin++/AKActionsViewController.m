@@ -7,6 +7,7 @@
 //
 
 #import "AKActionsViewController.h"
+#import "AKItemsViewController.h"
 
 @interface AKActionsViewController () {
   NSArray* _questions;
@@ -14,13 +15,13 @@
 
 @end
 
-static NSString* kQ1 = @"Eating lunch";
-static NSString* kQ2 = @"Eating dinner";
-static NSString* kQ3 = @"Flying to";
-static NSString* kQ4 = @"Visiting";
-static NSString* kQ5 = @"Staying at";
-static NSString* kQ6 = @"Drinking";
-static NSString* kQ7 = @"Watching";
+static NSString* kQ1String = @"Eating lunch";
+static NSString* kQ2String = @"Eating dinner";
+static NSString* kQ3String = @"Flying to";
+static NSString* kQ4String = @"Visiting";
+static NSString* kQ5String = @"Staying at";
+static NSString* kQ6String = @"Drinking";
+static NSString* kQ7String = @"Watching";
 
 @implementation AKActionsViewController
 
@@ -33,15 +34,18 @@ static NSString* kQ7 = @"Watching";
     return self;
 }
 
-- (id)initWithPlace:(AKPlace*) place {
-  if (self = [super initWithNibName:nil bundle:nil]) {
+- (id)initWithFacebook:(Facebook *)facebook place:(AKPlace *) place
+{
+  if (self = [super initWithStyle:UITableViewStylePlain]) {
     _place = [place retain];
-    _questions = [[NSArray alloc] initWithObjects: kQ1, kQ2, kQ3, kQ4, kQ5, kQ6, kQ7, nil];
+    _facebook = [facebook retain];
+    _questions = [[NSArray alloc] initWithObjects: kQ1String, kQ2String, kQ3String, kQ4String, kQ5String, kQ6String, kQ7String, nil];
   }
   return self;
 }
 
 - (void)dealloc {
+  [_facebook release];
   [_place release];
   [_questions release];
   [super dealloc];
@@ -78,10 +82,10 @@ static NSString* kQ7 = @"Watching";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *CellIdentifier = @"Cell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  static NSString *cellIdentifier = @"actionCell";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
   }
 
   NSString* question = (NSString*)[_questions objectAtIndex: indexPath.row];
@@ -89,57 +93,18 @@ static NSString* kQ7 = @"Watching";
   return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+  // Warning: this is hacky as hell
+  AKQuestionType questionType = indexPath.row + 1;
+
+  UITableViewController* controller = [[AKItemsViewController alloc] initWithFacebook:_facebook
+                                                                                place:_place
+                                                                         questionType:questionType];
+  [self.navigationController pushViewController:controller animated:YES];
+  [controller release];
 }
 
 @end
