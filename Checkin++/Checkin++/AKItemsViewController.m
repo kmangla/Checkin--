@@ -9,21 +9,28 @@
 #import "AKItemsViewController.h"
 #import "FBConnect.h"
 #import "AKItem.h"
+#import "AKSearchView.h"
 
 static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php";
 
 @interface AKItemsViewController () <FBRequestDelegate, UIAlertViewDelegate>
 
-- (void)_initiateObjectsDownload;
+- (void)_sendObjectsDownloadRequest;
+- (void)_sendObjectCreateRequest;
+- (void)_sendPublishRequestWithItemId:(NSString *)itemId;
 
 @property(nonatomic, retain) FBRequest *downloadRequest;
+@property(nonatomic, retain) FBRequest *createRequest;
 @property(nonatomic, retain) FBRequest *publishRequest;
+@property(nonatomic, retain) AKSearchView *searchView;
 
 @end
 
 @implementation AKItemsViewController
 @synthesize downloadRequest = _downloadRequest;
+@synthesize createRequest = _createRequest;
 @synthesize publishRequest = _publishRequest;
+@synthesize searchView = _searchView;
 
 #pragma mark - Lifecycle
 
@@ -42,7 +49,9 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   [_place release];
   [_facebook release];
   [_downloadRequest release];
+  [_createRequest release];
   [_publishRequest release];
+  [_searchView release];
 
   [super dealloc];
 }
@@ -53,11 +62,25 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
 {
   [super viewDidLoad];
 
-  [self _initiateObjectsDownload];
+  CGRect searchViewFrame = CGRectMake(0, 0, self.view.bounds.size.width, 44);
+  AKSearchView *searchView = [[AKSearchView alloc] initWithFrame:searchViewFrame];
+  searchView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(textFieldDidChange:)
+                                               name:UITextFieldTextDidChangeNotification
+                                             object:searchView.textField];
+  self.searchView = searchView;
+  [searchView release];
+
+  self.tableView.tableHeaderView = self.searchView;
+
+  [self _sendObjectsDownloadRequest];
 }
 
 - (void)viewDidUnload
 {
+  self.searchView = nil;
+
   [super viewDidUnload];
 }
 
@@ -94,32 +117,21 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   // publish the open graph story
   AKItem *item = [_items objectAtIndex:indexPath.row];
 
-  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                 _facebook.accessToken, @"access_token",
-                                 item.questionType, @"question_type",
-                                 _place.fbid, @"page_id",
-                                 item.itemId, @"item_id",
-                                 @"1", @"publish",
-                                 nil];
-  FBRequest *request = [FBRequest getRequestWithParams:params
-                                            httpMethod:@"POST"
-                                              delegate:self
-                                            requestURL:kAppURL];
-  [self.publishRequest.connection cancel];
-  self.publishRequest = request;
-  [request connect];
+  [self _sendPublishRequestWithItemId:item.itemId];
 }
 
 #pragma mark - FBRequestDelegate
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response
 {
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
-
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+  NSLog(@"Request failed: %@", error);
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result
@@ -133,6 +145,13 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
     [_items release];
     _items = items;
     [self.tableView reloadData];
+  } else if (request == self.createRequest) {
+    NSString *itemId = [result objectForKey:@"item_id"];
+
+
+    [self _sendPublishRequestWithItemId:itemId];
+    self.createRequest = nil;
+
   } else if (request == self.publishRequest) {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
                                                     message:@"Thanks for playing"
@@ -151,9 +170,40 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+#pragma mark - NSNotificationCenter
+
+- (void)textFieldDidChange:(NSNotification *)notification
+{
+  self.addButtonVisible = (self.searchView.textField.text.length > 0);
+}
+
+#pragma mark - Properties
+
+- (BOOL)addButtonVisible
+{
+  return _addButtonVisible;
+}
+
+- (void)setAddButtonVisible:(BOOL)addButtonVisible
+{
+  if (addButtonVisible != _addButtonVisible) {
+    _addButtonVisible = addButtonVisible;
+    if (_addButtonVisible) {
+      self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+                                                 initWithTitle:@"Add Item"
+                                                 style:UIBarButtonItemStyleBordered
+                                                 target:self
+                                                 action:@selector(_didTapAdd:)]
+                                                autorelease];
+    } else {
+      self.navigationItem.rightBarButtonItem = nil;
+    }
+  }
+}
+
 #pragma mark - Private
 
-- (void)_initiateObjectsDownload
+- (void)_sendObjectsDownloadRequest
 {
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                  [NSString stringWithFormat:@"%d", _questionType], @"question_type",
@@ -166,6 +216,48 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   [self.downloadRequest.connection cancel];
   self.downloadRequest = request;
   [request connect];
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)_sendObjectCreateRequest
+{
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 [NSString stringWithFormat:@"%d", _questionType], @"question_type",
+                                 _place.fbid, @"page_id",
+                                 self.searchView.textField.text, @"name",
+                                 nil];
+  FBRequest *request = [FBRequest getRequestWithParams:params
+                                            httpMethod:@"POST"
+                                              delegate:self
+                                            requestURL:kAppURL];
+  [self.createRequest.connection cancel];
+  self.createRequest = request;
+  [request connect];
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)_sendPublishRequestWithItemId:(NSString *)itemId
+{
+  NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 _facebook.accessToken, @"access_token",
+                                 [NSString stringWithFormat:@"%d", _questionType], @"question_type",
+                                 _place.fbid, @"page_id",
+                                 itemId, @"item_id",
+                                 @"1", @"publish",
+                                 nil];
+  FBRequest *request = [FBRequest getRequestWithParams:params
+                                            httpMethod:@"POST"
+                                              delegate:self
+                                            requestURL:kAppURL];
+  [self.publishRequest.connection cancel];
+  self.publishRequest = request;
+  [request connect];
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)_didTapAdd:(id)sender
+{
+  [self _sendObjectCreateRequest];
 }
 
 @end

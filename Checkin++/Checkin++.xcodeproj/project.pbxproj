@@ -31,6 +31,7 @@
 		B079AA13156614900082F465 /* AKActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B079AA12156614900082F465 /* AKActionsViewController.m */; };
 		B079AA161566187B0082F465 /* AKItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B079AA151566187B0082F465 /* AKItemsViewController.m */; };
 		B079AA1C1566541A0082F465 /* AKItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B079AA1B156654190082F465 /* AKItem.m */; };
+		B07F997A15665BD100CFE711 /* AKSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B07F997915665BD000CFE711 /* AKSearchView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		B079AA151566187B0082F465 /* AKItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKItemsViewController.m; sourceTree = "<group>"; };
 		B079AA1A156654190082F465 /* AKItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKItem.h; sourceTree = "<group>"; };
 		B079AA1B156654190082F465 /* AKItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKItem.m; sourceTree = "<group>"; };
+		B07F997815665BD000CFE711 /* AKSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSearchView.h; sourceTree = "<group>"; };
+		B07F997915665BD000CFE711 /* AKSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSearchView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +207,8 @@
 				B079AA0F15660BFF0082F465 /* AKPlace.m */,
 				B079AA1A156654190082F465 /* AKItem.h */,
 				B079AA1B156654190082F465 /* AKItem.m */,
+				B07F997815665BD000CFE711 /* AKSearchView.h */,
+				B07F997915665BD000CFE711 /* AKSearchView.m */,
 				B06A61561565E9BD00921912 /* Supporting Files */,
 			);
 			path = "Checkin++";
@@ -317,6 +322,7 @@
 				B079AA13156614900082F465 /* AKActionsViewController.m in Sources */,
 				B079AA161566187B0082F465 /* AKItemsViewController.m in Sources */,
 				B079AA1C1566541A0082F465 /* AKItem.m in Sources */,
+				B07F997A15665BD100CFE711 /* AKSearchView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
