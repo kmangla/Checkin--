@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7BF18A241565F85F004E2002 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BF18A231565F85F004E2002 /* libfacebook_ios_sdk.a */; };
 		B06A61501565E9BD00921912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A614F1565E9BD00921912 /* UIKit.framework */; };
 		B06A61521565E9BD00921912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A61511565E9BD00921912 /* Foundation.framework */; };
 		B06A61541565E9BD00921912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A61531565E9BD00921912 /* CoreGraphics.framework */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7BF18A231565F85F004E2002 /* libfacebook_ios_sdk.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libfacebook_ios_sdk.a; path = "facebook-ios-sdk/src/build/Release-iphoneos/libfacebook_ios_sdk.a"; sourceTree = "<group>"; };
 		B06A614B1565E9BD00921912 /* Checkin++.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Checkin++.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06A614F1565E9BD00921912 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B06A61511565E9BD00921912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF18A241565F85F004E2002 /* libfacebook_ios_sdk.a in Frameworks */,
 				B06A61501565E9BD00921912 /* UIKit.framework in Frameworks */,
 				B06A61521565E9BD00921912 /* Foundation.framework in Frameworks */,
 				B06A61541565E9BD00921912 /* CoreGraphics.framework in Frameworks */,
@@ -48,6 +51,7 @@
 		B06A61401565E9BD00921912 = {
 			isa = PBXGroup;
 			children = (
+				7BF18A231565F85F004E2002 /* libfacebook_ios_sdk.a */,
 				B06A61551565E9BD00921912 /* Checkin++ */,
 				B06A614E1565E9BD00921912 /* Frameworks */,
 				B06A614C1565E9BD00921912 /* Products */,
@@ -261,6 +265,7 @@
 				B06A616B1565E9BD00921912 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
