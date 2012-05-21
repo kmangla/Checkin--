@@ -71,6 +71,12 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
                                              object:searchView.textField];
   self.searchView = searchView;
   [searchView release];
+  self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+                                             initWithTitle:@"Post"
+                                             style:UIBarButtonItemStyleBordered
+                                             target:self
+                                             action:@selector(_didTapPost:)]
+                                            autorelease];;
 
   self.tableView.tableHeaderView = self.searchView;
 
@@ -197,7 +203,12 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
                                                  action:@selector(_didTapAdd:)]
                                                 autorelease];
     } else {
-      self.navigationItem.rightBarButtonItem = nil;
+      self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+                                                 initWithTitle:@"Post"
+                                                 style:UIBarButtonItemStyleBordered
+                                                 target:self
+                                                 action:@selector(_didTapPost:)]
+                                                autorelease];;
     }
   }
 }
@@ -255,6 +266,29 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   self.publishRequest = request;
   [request connect];
   [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)_sendPublishRequestWithoutItemId
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   _facebook.accessToken, @"access_token",
+                                   [NSString stringWithFormat:@"%d", _questionType], @"question_type",
+                                   _place.fbid, @"page_id",
+                                   @"1", @"publish",
+                                   nil];
+    FBRequest *request = [FBRequest getRequestWithParams:params
+                                              httpMethod:@"POST"
+                                                delegate:self
+                                              requestURL:kAppURL];
+    [self.publishRequest.connection cancel];
+    self.publishRequest = request;
+    [request connect];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)_didTapPost:(id)sender
+{
+    [self _sendPublishRequestWithoutItemId];
 }
 
 - (void)_didTapAdd:(id)sender
