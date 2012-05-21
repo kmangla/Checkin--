@@ -15,13 +15,14 @@
 
 @end
 
-static NSString* kQ1String = @"Eating lunch";
-static NSString* kQ2String = @"Eating dinner";
-static NSString* kQ3String = @"Flying to";
-static NSString* kQ4String = @"Visiting";
-static NSString* kQ5String = @"Staying at";
-static NSString* kQ6String = @"Drinking";
-static NSString* kQ7String = @"Watching";
+static NSString* kQ1String = @"Eating a meal";
+static NSString* kQ2String = @"Flying to another city";
+static NSString* kQ3String = @"Visiting a place";
+static NSString* kQ4String = @"Staying at a hotel";
+static NSString* kQ5String = @"Having a drink";
+static NSString* kQ6String = @"Watching a movie/show";
+static NSString* kQ7String = @"Playing a game/sport";
+
 
 @implementation AKActionsViewController
 
