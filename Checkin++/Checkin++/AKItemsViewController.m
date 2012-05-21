@@ -175,6 +175,7 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
 - (void)textFieldDidChange:(NSNotification *)notification
 {
   self.addButtonVisible = (self.searchView.textField.text.length > 0);
+ [self _sendObjectsDownloadRequest];
 }
 
 #pragma mark - Properties
@@ -208,6 +209,7 @@ static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/items.php
   NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                  [NSString stringWithFormat:@"%d", _questionType], @"question_type",
                                  _place.fbid, @"page_id",
+                                 self.searchView.textField.text, @"query",
                                  nil];
   FBRequest *request = [FBRequest getRequestWithParams:params
                                             httpMethod:@"GET"
