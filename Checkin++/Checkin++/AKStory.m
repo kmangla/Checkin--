@@ -7,6 +7,7 @@
 //
 
 #import "AKStory.h"
+#import <CoreText/CoreText.h>
 
 @implementation AKStory
 @synthesize actorName = _actorName;
@@ -42,11 +43,48 @@
 #pragma mark - Properties
 - (NSAttributedString *)storyString
 {
-  // TODO: make this colorful, internationalize, make some fields optional
+  // TODO: internationalize, also probably clean up using helper functions / categories
 
-  NSString *constructedString = nil;
+  NSMutableAttributedString *text = [[[NSMutableAttributedString alloc] init] autorelease];
+  CTFontRef font = CTFontCreateWithName(CFSTR("Helvetica"), 17, NULL);
+  UIColor *blackColor = [UIColor blackColor];
+  UIColor *blueColor = [UIColor blueColor];
+
+  NSAttributedString *actorString = [[NSAttributedString alloc] initWithString:self.actorName
+                                                                    attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                (id)font, kCTFontAttributeName,
+                                                                                blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                                                nil]];
+
+  NSAttributedString *objectString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", self.objectName]
+                                                                     attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                 (id)font, kCTFontAttributeName,
+                                                                                 blueColor.CGColor, kCTForegroundColorAttributeName,
+                                                                                 nil]];
+
+  // TODO: probably should say "from" for flew
+  NSAttributedString *prepositionString = [[NSAttributedString alloc] initWithString:@"at "
+                                                                          attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                      (id)font, kCTFontAttributeName,
+                                                                                      blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                                                      nil]];
+
+  NSAttributedString *placeString = [[NSAttributedString alloc] initWithString:self.placeName
+                                                                    attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                (id)font, kCTFontAttributeName,
+                                                                                blueColor.CGColor, kCTForegroundColorAttributeName,
+                                                                                nil]];
+
+  NSAttributedString *periodString = [[NSAttributedString alloc] initWithString:@"."
+                                                                     attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                 (id)font, kCTFontAttributeName,
+                                                                                 blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                                                 nil]];
+
+  NSAttributedString *verbString = nil;
 
   if (self.verbName != nil && self.verbName.length > 0) {
+
     if (self.objectName != nil && self.objectName.length > 0) {
 
       // Note: fragile
@@ -57,25 +95,55 @@
         BOOL displayAn = (l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u');
 
         if (displayAn) {
-          constructedString = [NSString stringWithFormat:@"%@ %@n %@ at %@",
-                               self.actorName, self.verbName, self.objectName, self.placeName];
+          verbString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@n ", self.verbName]
+                                                       attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                   (id)font, kCTFontAttributeName,
+                                                                   blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                                   nil]];
         } else {
-          constructedString = [NSString stringWithFormat:@"%@ %@ %@ at %@",
-                               self.actorName, self.verbName, self.objectName, self.placeName];
+          verbString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ", self.verbName]
+                                                       attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                   (id)font, kCTFontAttributeName,
+                                                                   blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                                   nil]];
         }
       } else {
-        constructedString = [NSString stringWithFormat:@"%@ %@ %@ at %@",
-                             self.actorName, self.verbName, self.objectName, self.placeName];
+        verbString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@ ", self.verbName]
+                                                     attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                 (id)font, kCTFontAttributeName,
+                                                                 blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                                 nil]];
       }
-    } else {
-      constructedString = [NSString stringWithFormat:@"%@ %@ at %@",
-                           self.actorName, self.verbName, self.placeName];
     }
   } else {
-    constructedString = [NSString stringWithFormat:@"%@ checked in at %@", self.actorName, self.placeName];
+    verbString = [[NSAttributedString alloc] initWithString:@" checked in at "
+                                                 attributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                             (id)font, kCTFontAttributeName,
+                                                             blackColor.CGColor, kCTForegroundColorAttributeName,
+                                                             nil]];
   }
 
-  return [[[NSAttributedString alloc] initWithString:constructedString] autorelease];
+  // Construct string
+  [text appendAttributedString:actorString];
+  [text appendAttributedString:verbString];
+  if (objectString != nil) {
+    [text appendAttributedString:objectString];
+  }
+  [text appendAttributedString:prepositionString];
+  [text appendAttributedString:placeString];
+  [text appendAttributedString:periodString];
+
+  // Clean up
+  [actorString release];
+  [verbString release];
+  [objectString release];
+  [prepositionString release];
+  [placeString release];
+  [periodString release];
+
+  CFRelease(font);
+
+  return text;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AKActivityLogController.h"
 #import "AKStory.h"
+#import "AKStoryCell.h"
 
 @implementation AKActivityLogController
 
@@ -37,6 +38,7 @@
   [super viewDidLoad];
 
   self.title = @"Activity Log";
+  self.tableView.rowHeight = 60;
 }
 
 
@@ -52,12 +54,12 @@
   static NSString *cellIdentifier = @"storyCell";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    cell = [[AKStoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
   }
 
   AKStory *story = [_items objectAtIndex:indexPath.row];
-  cell.textLabel.text = [story.storyString string]; // TODO: make this colored, and line-wrap the cell
+  ((AKStoryCell *)cell).storyString = story.storyString;
 
   return cell;
 }
