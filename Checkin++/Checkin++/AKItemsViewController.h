@@ -19,7 +19,10 @@
   FBRequest *_downloadRequest;
   FBRequest *_createRequest;
   FBRequest *_publishRequest;
+  NSString *_chosenItemName;
   NSArray *_items;
+  NSArray *_verbs;
+  NSArray *_titles;
   BOOL _addButtonVisible;
 
   AKSearchView *_searchView;

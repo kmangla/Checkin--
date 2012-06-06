@@ -19,6 +19,8 @@
 		7BF18A571565FABC004E2002 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF18A3B1565FABC004E2002 /* Facebook.m */; };
 		7BF18A581565FABC004E2002 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF18A3E1565FABC004E2002 /* FBLoginDialog.m */; };
 		7BF18A591565FABC004E2002 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF18A401565FABC004E2002 /* FBDialog.m */; };
+		B02C8690157FB6F8009336BC /* AKActivityLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = B02C868F157FB6F8009336BC /* AKActivityLogController.m */; };
+		B02C8693157FB7A6009336BC /* AKStory.m in Sources */ = {isa = PBXBuildFile; fileRef = B02C8692157FB7A6009336BC /* AKStory.m */; };
 		B06A61501565E9BD00921912 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A614F1565E9BD00921912 /* UIKit.framework */; };
 		B06A61521565E9BD00921912 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A61511565E9BD00921912 /* Foundation.framework */; };
 		B06A61541565E9BD00921912 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06A61531565E9BD00921912 /* CoreGraphics.framework */; };
@@ -72,6 +74,10 @@
 		7BF18A4B1565FABC004E2002 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		7BF18A4C1565FABC004E2002 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		7BF18A4D1565FABC004E2002 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		B02C868E157FB6F8009336BC /* AKActivityLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKActivityLogController.h; sourceTree = "<group>"; };
+		B02C868F157FB6F8009336BC /* AKActivityLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKActivityLogController.m; sourceTree = "<group>"; };
+		B02C8691157FB7A6009336BC /* AKStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKStory.h; sourceTree = "<group>"; };
+		B02C8692157FB7A6009336BC /* AKStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKStory.m; sourceTree = "<group>"; };
 		B06A614B1565E9BD00921912 /* Checkin++.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Checkin++.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06A614F1565E9BD00921912 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B06A61511565E9BD00921912 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -203,10 +209,14 @@
 				B079AA12156614900082F465 /* AKActionsViewController.m */,
 				B079AA141566187B0082F465 /* AKItemsViewController.h */,
 				B079AA151566187B0082F465 /* AKItemsViewController.m */,
+				B02C868E157FB6F8009336BC /* AKActivityLogController.h */,
+				B02C868F157FB6F8009336BC /* AKActivityLogController.m */,
 				B079AA0E15660BFE0082F465 /* AKPlace.h */,
 				B079AA0F15660BFF0082F465 /* AKPlace.m */,
 				B079AA1A156654190082F465 /* AKItem.h */,
 				B079AA1B156654190082F465 /* AKItem.m */,
+				B02C8691157FB7A6009336BC /* AKStory.h */,
+				B02C8692157FB7A6009336BC /* AKStory.m */,
 				B07F997815665BD000CFE711 /* AKSearchView.h */,
 				B07F997915665BD000CFE711 /* AKSearchView.m */,
 				B06A61561565E9BD00921912 /* Supporting Files */,
@@ -323,6 +333,8 @@
 				B079AA161566187B0082F465 /* AKItemsViewController.m in Sources */,
 				B079AA1C1566541A0082F465 /* AKItem.m in Sources */,
 				B07F997A15665BD100CFE711 /* AKSearchView.m in Sources */,
+				B02C8690157FB6F8009336BC /* AKActivityLogController.m in Sources */,
+				B02C8693157FB7A6009336BC /* AKStory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
