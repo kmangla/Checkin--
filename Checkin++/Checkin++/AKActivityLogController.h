@@ -15,6 +15,7 @@
 {
   Facebook *_facebook;
   NSArray *_items;
+  FBRequest *_downloadRequest;
 }
 
 // TODO: initial story might be removed if we decide to only download from server

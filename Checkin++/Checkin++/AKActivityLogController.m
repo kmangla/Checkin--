@@ -10,7 +10,18 @@
 #import "AKStory.h"
 #import "AKStoryCell.h"
 
+static NSString *kAppURL = @"https://blooming-water-4048.herokuapp.com/activity.php";
+
+@interface AKActivityLogController () <FBRequestDelegate, UIAlertViewDelegate>
+
+- (void)_sendObjectsDownloadRequest;
+
+@property(nonatomic, retain) FBRequest *downloadRequest;
+
+@end
+
 @implementation AKActivityLogController
+@synthesize downloadRequest = _downloadRequest;
 
 - (id)initWithFacebook:(Facebook *)facebook initialStory:(AKStory *)initialStory
 {
@@ -19,6 +30,7 @@
     if (initialStory != nil) {
       _items = [[NSArray alloc] initWithObjects:initialStory, nil];
     }
+    [self _sendObjectsDownloadRequest];
   }
   return self;
 }
@@ -39,6 +51,49 @@
 
   self.title = @"Activity Log";
   self.tableView.rowHeight = 60;
+}
+
+- (void)_sendObjectsDownloadRequest
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   _facebook.accessToken, @"access_token",
+                                   nil];
+    FBRequest *request = [FBRequest getRequestWithParams:params
+                                              httpMethod:@"GET"
+                                                delegate:self
+                                              requestURL:kAppURL];
+    [self.downloadRequest.connection cancel];
+    self.downloadRequest = request;
+    [request connect];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+#pragma mark - FBRequestDelegate
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSLog(@"Request failed: %@", error);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result
+{
+    if (request == self.downloadRequest) {
+        NSMutableArray *items = [[NSMutableArray alloc] init];
+        for (NSDictionary *story in result){
+            [items addObject:[[AKStory alloc] initWithJSON:story]];
+        }
+        self.downloadRequest = nil;
+        [_items release];
+        _items = items;
+        [self.tableView reloadData];
+  }
 }
 
 

@@ -33,5 +33,6 @@
           placeName:(NSString *)placeName
          objectName:(NSString *)objectName;
 
+- (id)initWithJSON:(id)json;
 
 @end

@@ -30,6 +30,17 @@
   return self;
 }
 
+- (id)initWithJSON:(id)json
+{
+    if ((self = [super init])) {
+        _actorName = [[json objectForKey:@"actor_name"] copy];
+        _verbName = [[json objectForKey:@"verb_name"] copy];
+        _placeName = [[json objectForKey:@"place_name"] copy];
+        _objectName = [[json objectForKey:@"object_name"] copy];
+    }
+    return self;
+}
+
 - (void)dealloc
 {
   [_actorName release];
